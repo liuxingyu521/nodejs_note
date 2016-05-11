@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件回调处理</title>
+	<style>
+		.ball{
+			margin-left: 0;
+			margin-top: 2px;
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+		}
+		.ball1{
+			background: red;
+		}
+		.ball2{
+			background: yellow;
+		}
+		.ball3{
+			background: green;
+		}
+	</style>
+	<script src="node_modules/bluebird/js/browser/bluebird.js"></script>
+</head>
+<body>
+	<div class="ball ball1" style="margin-left: 0"></div>
+	<div class="ball ball2" style="margin-left: 0"></div>
+	<div class="ball ball3" style="margin-left: 0"></div>
+	<script>
+		var ball1 = document.getElementsByClassName('ball1')[0];
+		var ball2 = document.getElementsByClassName('ball2')[0];
+		var ball3 = document.getElementsByClassName('ball3')[0];
+
+		var Promise = window.Promise;
+
+		function PromiseAnimate(ball, distance){
+			return new Promise(function(resolve, reject){
+				function _animate(){
+					var iPos = parseInt(ball.style.marginLeft);
+					setTimeout(function(){
+						if(iPos == distance){
+							resolve && resolve();
+						}
+						else{
+							if(iPos < distance){
+								iPos++;
+							}
+							else{
+								iPos--;
+							}
+							ball.style.marginLeft = iPos + 'px';
+							_animate();
+						}
+					},13);
+				}
+				_animate();
+			});
+		}
+
+		PromiseAnimate(ball1, 100)
+			.then(function(){
+				return PromiseAnimate(ball2, 200);
+			})
+			.then(function(){
+				return PromiseAnimate(ball3, 300);
+			})
+			.then(function(){
+				return PromiseAnimate(ball3, 150);
+			})
+			.then(function(){
+				return PromiseAnimate(ball2, 150);
+			})
+			.then(function(){
+				return PromiseAnimate(ball1, 150);
+			})
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件回调处理</title>
+	<style>
+		.ball{
+			margin-left: 0;
+			margin-top: 2px;
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+		}
+		.ball1{
+			background: red;
+		}
+		.ball2{
+			background: yellow;
+		}
+		.ball3{
+			background: green;
+		}
+	</style>
+</head>
+<body>
+	<div class="ball ball1" style="margin-left: 0"></div>
+	<div class="ball ball2" style="margin-left: 0"></div>
+	<div class="ball ball3" style="margin-left: 0"></div>
+	<script>
+		var ball1 = document.getElementsByClassName('ball1')[0];
+		var ball2 = document.getElementsByClassName('ball2')[0];
+		var ball3 = document.getElementsByClassName('ball3')[0];
+
+		// 方法1：
+		// function doAnimate(iEle, iTarget, callback){
+		// 	var iPos = parseInt(iEle.style.marginLeft);
+		// 	if(iPos < iTarget){
+		// 		setTimeout(function(){
+		// 			iEle.style.marginLeft = iPos + 1 +'px';
+		// 			doAnimate(iEle, iTarget, callback);
+		// 		},13);
+		// 	}
+		// 	else if(iPos > iTarget){
+		// 		setTimeout(function(){
+		// 			iEle.style.marginLeft = iPos - 1 +'px';
+		// 			doAnimate(iEle, iTarget, callback);
+		// 		},13);
+		// 	}
+		// 	else{
+		// 		callback && callback();
+		// 	}
+		// }
+
+		// 方法1优化
+		function doAnimate(iEle, iTarget, callback){
+			var iPos = parseInt(iEle.style.marginLeft);
+			setTimeout(function(){
+				if(iPos == iTarget){
+					callback && callback();
+				}
+				else{
+					if(iPos < iTarget){
+						iPos++;
+					}
+					else{
+						iPos--;
+					}
+					iEle.style.marginLeft = iPos + 'px';
+					doAnimate(iEle, iTarget,callback);
+				}
+			},13);
+		}
+
+		doAnimate(ball1, 100, function(){
+			doAnimate(ball2, 200, function(){
+				doAnimate(ball3, 300, function(){
+					doAnimate(ball3, 150, function(){
+						doAnimate(ball2, 150, function(){
+							doAnimate(ball1, 150);
+						})
+					})
+				})
+			})
+		})
+	</script>
+</body>
+</html>
