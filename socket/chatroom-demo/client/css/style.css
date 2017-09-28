@@ -1,0 +1,94 @@
+body{
+	background-color: #f9f9cd;
+}
+.chat-header .count-tips{
+	width: 50%;
+}
+.chat-header .cur-count{
+	font-weight: bold;
+  font-size: 17px;
+	color: blue;
+}
+.chat-body{
+	position: relative;
+	min-height: 400px;
+  background-color: #fafafa;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 2px 2px #ccc;
+}
+.chat-body .screen{
+	min-height: 355px;
+	padding: 4px;
+	box-shadow: 0px -2px 5px 5px rgba(227, 227, 227, 0.4) inset;
+}
+.chat-body .input-area{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.screen p{
+	margin: 0;
+  padding: 5px 0 5px;
+  text-align: center;
+  position: relative;
+}
+.screen p span{
+	display: inline-block;
+}
+.screen p.enter-tip span,
+.screen p.leave-tip span{
+  padding: 3px 12px;
+  font-size: 12px;
+  background-color: rgba(182, 232, 247, 0.7);
+  border-radius: 10px;
+}
+.screen section{
+	position: relative;
+  margin: 0 4px 14px;
+}
+.screen section h5{
+	margin: 2px 0 2px;
+}
+.screen section.self-message{
+	text-align: right;
+}
+.screen section span{
+  display: inline-block;
+  background-color: #ddd;
+  padding: 4px 10px;
+  max-width: 84%;
+  word-break: break-word;
+  position: relative;
+  top: 4px;
+  left: 30px;
+  border-radius: 6px;
+}
+.screen section.self-message span{
+	right: 30px;
+	left: auto;
+}
+.screen section span:before{
+	content: '';
+	position: absolute;
+  border: 5px solid #ddd;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  top: 3px;
+  left: -5px;
+}
+.screen section.self-message span:before{
+	border-right-color: transparent;
+	border-left-color: #ddd;
+	right: -5px;
+	left: auto;
+}
+.input-area{
+	padding: 4px 8px;
+}
+.input-area input.form-control{
+	width: 86%;
+}
+.input-area button{
+	width: 13%;
+}

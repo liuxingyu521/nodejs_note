@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>socket communication</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div class="container chatroom">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="chat-header">
+					<h3>基于WebSocket应用的聊天室</h3>
+					<div class="count-tips">
+						<p>当前在线人数：<span class="cur-count">20</span></p>
+						<p>当前用户：<span class="cur-user">张三</span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+				<div class="col-md-6">
+					<div class="chat-body">
+						<div class="screen">
+							<p class="enter-tip">
+								<span><strong>李四</strong> 加入了聊天室</span>
+							</p>
+							<section class="other-message">
+								<h5><strong>李四:</strong></h5>
+								<span>hello, i want to study websocket~ </span>
+							</section>
+							<section class="self-message">
+								<h5><strong>:我</strong></h5>
+								<span>你好~</span>
+							</section>
+						</div>
+						<div class="input-area">
+							<form action="javascript:void(0)" class="form-inline">
+								<input type="text" class="form-control"/>
+								<button class="btn btn-default">发送</button>
+							</form>
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>
+	
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			window.CHAT = (function(){
+				var _chat = {
+					curUsersCount: 0,
+					cur_user: {
+						userId: '',
+						userName: ''
+					},
+					socket: null,
+					chatDom: $('.chatroom')[0],
+					init: function(username){
+						// 初始化用户信息
+						this.cur_user.userName = username;
+						this.cur_user.userId = calcUserId();
+
+						// 建立socket连接
+						this.socket = io('ws://localhost:9000');
+
+						// 发送用户登录注册事件
+						this.socket.emit('login', {
+							userName: this.cur_user.userName,
+							userId: this.cur_user.userId
+						})
+
+						// 监听在线总人数
+						this.socket.on('changeUsersCount', function(count){
+							$(this.chatDom).find('.cur-count').text(count);
+						}.bind(this));
+
+						// 监听用户加入聊天室
+						this.socket.on('userIn', function(user){
+							this.userIn(user);
+						}.bind(this));
+					},
+					userIn: function(user){
+						// 添加userIn消息
+						$(this.chatDom).find('.screen')
+								.append('<p class="enter-tip">\
+													<span><strong>' + user.userName + '</strong> 加入了聊天室</span>\
+												</p>');
+						// 聊天屏幕滚动到最底部
+						// todo..
+					}
+				}
+
+				function calcUserId(){
+						var time = (new Date()).getTime();
+						return (Math.round(Math.random()*1000).toString()+time);
+				}
+
+				return _chat;
+			})();
+
+			window.CHAT.init('张三');
+
+		})
+
+	</script>
+</body>
+</html>

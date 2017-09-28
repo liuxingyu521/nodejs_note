@@ -1,0 +1,28 @@
+{
+  "name": "nodejs_note",
+  "version": "1.0.0",
+  "description": "learn node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liuxingyu521/nodejs_note.git"
+  },
+  "keywords": [
+    "node",
+    "socket",
+    "express"
+  ],
+  "author": "Richard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liuxingyu521/nodejs_note/issues"
+  },
+  "homepage": "https://github.com/liuxingyu521/nodejs_note#readme",
+  "dependencies": {
+    "express": "^4.15.5",
+    "socket.io": "^2.0.3"
+  }
+}
