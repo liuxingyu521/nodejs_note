@@ -11,6 +11,7 @@ body{
 }
 .chat-body{
 	position: relative;
+	padding-bottom: 44px;
 	min-height: 400px;
   background-color: #fafafa;
   border: 1px solid #ccc;
@@ -18,8 +19,10 @@ body{
 }
 .chat-body .screen{
 	min-height: 355px;
-	padding: 4px;
+	max-height: 560px;
+	padding: 8px 4px 4px;
 	box-shadow: 0px -2px 5px 5px rgba(227, 227, 227, 0.4) inset;
+  overflow-y: scroll;
 }
 .chat-body .input-area{
   position: absolute;
@@ -40,8 +43,13 @@ body{
 .screen p.leave-tip span{
   padding: 3px 12px;
   font-size: 12px;
-  background-color: rgba(182, 232, 247, 0.7);
   border-radius: 10px;
+}
+.screen p.enter-tip span{
+  background-color: rgba(182, 232, 247, 0.7);
+}
+.screen p.leave-tip span{
+	background-color: rgba(119, 119, 119, 0.2);
 }
 .screen section{
 	position: relative;

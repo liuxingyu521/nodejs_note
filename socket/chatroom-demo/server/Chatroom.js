@@ -3,7 +3,7 @@
 *  @File Descriptions: 
 *  @Date:   2017-09-28 14:31:46
 * 
-*  @Last Modified time: 2017-09-28 15:35:43
+*  @Last Modified time: 2017-09-29 14:47:58
 */
 
 // 安全模式类
@@ -23,7 +23,7 @@ Chatroom.prototype.changeChatroomName = function(name){
 
 Chatroom.prototype.addUser = function(user){
 	this.onlineUsers.push(user);
-	this.onineCounts++;
+	this.onlineCounts++;
 }
 
 Chatroom.prototype.deleteUser = function(user){
@@ -32,12 +32,12 @@ Chatroom.prototype.deleteUser = function(user){
 	// 找到该用户在列表里的索引
 	var delIndex = this.onlineUsers.findIndex(function(ele, index, arr){
 		if(user.userId == ele.userId){
-			return index;
+			return true;
 		}
 	})
 	// 如果找到索引，则删除
-	if(delIndex > 0){
-		this.onlineUsers.splice(index, 1);
+	if(delIndex >= 0){
+		this.onlineUsers.splice(delIndex, 1);
 		this.onlineCounts--;
 	}
 }
