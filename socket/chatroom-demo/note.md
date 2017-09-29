@@ -1,3 +1,5 @@
+## 该工程已迁移到[新的git地址](https://github.com/liuxingyu521/socket.io-chatroom-Demo.git)，后续会逐步增加更多功能。
+
 ## socket.io 学习笔记
 
 > 记录一些开发过程中遇到的小技巧和方法总结
